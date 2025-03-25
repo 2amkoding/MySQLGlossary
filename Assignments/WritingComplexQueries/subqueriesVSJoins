@@ -1,0 +1,39 @@
+##Precedence: 
+    Execution Time
+    Readability
+
+##subquery method:
+SELECT  *
+FROM clients
+WHERE client_id NOT IN(
+    SELECT DISTINCT client_id
+    FROM  invoicess
+)
+
+##join method:
+SELECT *
+FROM clients
+LEFTJOIN  invoices USING (client_id)
+WHERE  invoice_id iS NULL
+
+
+Find  cx who have ordered lettuce(id = 3)
+Select customer_id, first_name, last_name
+
+##subquery method:
+USE sql_store;
+SELECT *
+FROM  customers
+WHERE customer_id  IN (
+    SELECT  o.customer_id
+    FROM order_items oi
+    JOIN orders o USING (order_id)
+    WHERE product_id = 3
+)
+
+##join method:
+SELECT DISTINCT  customer_id, first_name, last_name
+FROM customers c
+JOIN orders o  USING (customer_id)
+JOIN order_items  oi USING (order_id)
+WHERE oi.product_id = 3
