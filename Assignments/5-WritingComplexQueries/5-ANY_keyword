@@ -1,0 +1,37 @@
+##  (ANY / SOME)
+
+## Problem: Select clients w at least two invoices
+
+## Method:
+## 1. Find count for each  client
+## 2. Select clients w invoice count > 2
+## 3. Refactor using ANY keyword
+
+## 1.
+USE sql_invoicing;
+
+SELECT client_id, count(*)
+FROM invoices
+GROUP BY client_id
+HAVING count(*) >= 2
+##  HAVING(filter) executes after GROUP BY
+
+## 2.
+SELECT *
+FROM clients
+WHERE client_id IN (
+    SELECT client_id
+    FROM invoices
+    GROUP BY client_id
+    HAVING count(*)  >= 2
+)
+
+## 3.
+SELECT *
+FROM clients
+WHERE client_id = ANY (
+    SELECT client_id
+    FROM invoices
+    GROUP BY client_id
+    HAVING count(*) >= 2
+)
