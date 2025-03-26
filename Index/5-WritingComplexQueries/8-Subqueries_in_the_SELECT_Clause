@@ -1,0 +1,43 @@
+## Subqueries can be used in other Clauses: (WHERE, SELECT, FROM)
+
+## Create a table: client id, name, total_sales,  avg of all invoice_totals, difference
+
+USE sql_invoicing;
+
+##  1. Find  client_id, and name from clients table
+SELECT
+    client_id, name
+FROM  clients
+
+## 2. Total_Sales  from each client
+SELECT
+    client_id, name,
+    (Select SUM(invoice_total)
+        FROM invoices
+        WHERE client_id =  c.client_id
+        AS total_sales)
+FROM clients c
+
+##  3. calculate  AVG Sales across all invoices
+SELECT
+    client_id, name,
+    (SELECT SUM(invoice_total)
+        FROM invoices
+        WHERE client_id =  c.client_id
+        AS total_sales),
+    (SELECT  AVG(invoice_total)  FROM invoices
+        AS average)
+FROM clients c
+
+## 4. Calculate  differnce
+SELECT
+    client_id, name,
+    (SELECT SUM(invoice_total)
+        FROM invoices
+        WHERE client_id =  c.client_id)
+        AS total_sales,
+    (SELECT  AVG(invoice_total)  FROM invoices)
+        AS average,
+    (SELECT total_sales - average) 
+        AS difference
+FROM clients c
