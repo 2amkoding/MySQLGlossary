@@ -1,0 +1,33 @@
+## select clients that have an invoice
+USE sql_inventory;
+## The IN operator RETURNS a data set to the WHERE clause.
+## This result can have a negative impact on Large Data Sets.
+SELECT *
+FROM clients
+WHERE client_id   IN (
+    SELECT DISTINCT client_id
+    FROM invoices
+)
+
+## A solution: EXISTS operator
+## The subquery !return a dataset.
+## Instead it does a boolean check to existing data. 
+SELECT *
+FROM clients c
+WHERE EXISTS(
+    SELECT client_id
+    FROM invoices
+    WHERE client_id  = c.client_id
+)
+
+## Find products that have never been ordered
+
+USE sql_store;
+
+SELECT *
+FROM  products p
+WHERE NOT  EXISTS (
+	SELECT  product_id
+    FROM  order_items
+    WHERE product_id = p.product_id
+)
