@@ -1,0 +1,9 @@
+SELECT DATE_ADD(NOW(), INTERVAL 1 DAY) ->  adds a day
+SELECT DATE_ADD(NOW(), INTERVAL 1 YEAR) ->  adds a year
+SELECT DATE_ADD(NOW(), INTERVAL -1 YEAR) ->  subtracts a year
+SELECT SUB(NOW(), INTERVAL 1 YEAR) ->  subtracts a year
+
+SELECT DATEDIFFNOW('2025-91-05', 2025-01-01') ->  4
+
+## number  of seconds  elapsed  since midnight
+SELECT  TIME_TO_SEC('09:00') -> 32400
