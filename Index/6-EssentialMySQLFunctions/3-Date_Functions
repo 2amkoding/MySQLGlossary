@@ -1,0 +1,18 @@
+SELECT NOW() ->   year-xx-xx  24:00:00
+SELECT CURDATE() ->  xxxx-xx-xx
+SELECT CURTIME() -> 11:33:00
+
+## Extracting compontents
+SELECT YEAR(NOW()) ->  2024
+SELECT MONTH(NOW()) -> integer values
+SELECT DAY(NOW()) ->
+SELECT SECOND(NOW()) -> integer values
+
+SELECT DAYNAME(NOW()) -> Monday ## string
+SELECT MONTHNAME(NOW()) -> March ## string
+
+SELECT EXTRACT(YEAR FROM NOW())  -> 2025
+
+SELECT *
+FROM orders
+WHERE YEAR(order_date) >= YEAR(NOW())
