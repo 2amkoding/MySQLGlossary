@@ -1,0 +1,33 @@
+
+## If the value in column is NULL, replace columnValue with 'Not Assigned'.
+## Name the returned column 'shipper'
+
+USE sql_store;
+
+SELECT 
+	order_id,
+    IFNULL(shipper_id, 'Not assigned') AS shipper
+FROM orders
+
+
+## COALESCE
+
+## If  shipper_id value is null, return value from comments, if comments is null, then return 'not assigned'
+
+USE sql_store;
+
+SELECT 
+	order_id,
+    COALESCE(shipper_id, comments, 'Not assigned') AS shipper
+FROM orders
+
+
+## Return a table w 2 columns: customer and phone
+## concat first+lastname in  customer column
+## if phone is  null, return 'unknown'
+USE sql_store;
+
+SELECT 
+	CONCAT(first_name, ' ', last_name) AS customer,
+    COALESCE(phone, 'unkown') AS phone
+FROM customers
