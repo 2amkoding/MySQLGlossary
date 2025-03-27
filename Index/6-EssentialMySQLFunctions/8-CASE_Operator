@@ -1,0 +1,34 @@
+USE sql_store;
+
+SELECT
+	order_id,
+    CASE
+		WHEN YEAR(order_date) = YEAR(NOW()) THEN 'Active'
+        WHEN YEAR(order_date) = YEAR(NOW()) - 1 THEN 'Last Year'
+        WHEN YEAR(order_date) < YEAR(NOW()) - 1 THEN 'Archived'
+        ELSE 'Future'
+	END AS category
+FROM orders
+
+
+
+## FROM customers table:
+## if points >= 3000 -> 'Gold'
+## if .. between 2000-3000 -> 'Silver'
+## if .. <=  1000  -> 'Bronze'
+
+## step1: return customers name column
+SELECT
+    CONCAT(first_name, ' ', last_name) AS customer
+FROM customers
+
+## step2: return category column
+SELECT
+    CONCAT(first_name, ' ', last_name) AS customer,
+    points,
+    CASE
+        WHEN points > 3000 THEN 'Gold'
+        WHEN points >= 2000 THEN 'Silver'
+        ELSE 'Bronze'
+    END AS category
+FROM customers
