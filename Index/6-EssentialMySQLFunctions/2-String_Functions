@@ -1,0 +1,29 @@
+## STRING  functions
+
+SELECT LENGTH('sky') -> 3
+SELECT UPPER('sky)  -> SKY
+SELECT LOWER('Sky)  -> sky
+
+SELECT LTRIM('     Sky') -> Sky
+SELECT RTRIM('Sky     ') -> Sky
+SELECT TRIM('     Sky     ') -> Sky
+
+SELECT LEFT('Kindergarten',4) -> Kind
+SELECT RIGHT('Kindergarten',6) -> garten
+
+##  SUBSTRING('String',  startValue, Optional-QuantiyOfChars)
+SELECT SUBSTRING('Kindergarten', 3,  5) -> nderg
+SELECT SUBSTRING('Kindergarten', 3,) -> ndergarten
+
+SELECT  LOCATE('n', 'Kindergarten') -> 3 ## !caseSensitive
+SELECT  LOCATE('q', 'Kindergarten') -> 0  ## !exist returns 0
+SELECT  LOCATE('garten', 'Kindergarten') -> 7
+
+SELECT  REPLACE('Kindergarten', 'garten', 'garden') -> Kindergarden
+
+SELECT CONCAT('first', 'last') -> firstlast
+
+SELECT  CONCAT(first_name, ' ', last_name AS full_name
+FROM customers
+
+##   complete reference: https://dev.mysql.com/doc/refman/8.4/en/string-functions.html
