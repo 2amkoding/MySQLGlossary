@@ -1,0 +1,47 @@
+USE sql_Store;
+
+## Classify Orders table into 2 categories: 'Active' and 'Archived'.
+## 'Active' = orders placed in current year
+
+## previous  methods: 
+##      1. Two SELECT satements, 1 for active orders, 1 for archive, 
+##      2. combine table using UNION operator
+
+## using IF
+IF(expression, first, second)
+
+SELECT
+    order_id,
+    order_date,
+    IF(YEAR(order_date) = YEAR(NOW()), 'Active',  'Archived')
+        AS category
+FROM orders
+
+
+## Write a query to produce a result of  4  columns: product_id, name, orders, frequency
+## if orders > 1, frequency = 'Many Times' else 'Once'
+
+## step1: Get product_id, name from products table
+SELECT
+    product_id,
+    name
+FROM products table
+
+## step2: Create a column to display number of orders  by joining order_items  from orders table
+SELECT
+    product_id,
+    name,
+    COUNT(*) AS orders
+FROM products table
+JOIN order_items USING (product_id)
+GROUP BY product,id, name
+
+## step3: create a column 'frequency'
+SELECT
+    product_id,
+    name,
+    COUNT(*) AS orders,
+    IF(COUNT(*) >1,  'Many  times', 'Once')  AS frequency
+FROM products table
+JOIN order_items USING (product_id)
+GROUP BY product,id, name
