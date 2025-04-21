@@ -1,0 +1,6 @@
+## Views is a powerful tool to save common queries to use later.
+## Views do not store data, however can be manipulated same way as tables.
+
+## Create a View AS  clients_balance
+## See the balance for each client
+## columns: client_id, name, balance
