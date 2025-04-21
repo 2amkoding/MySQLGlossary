@@ -1,0 +1,9 @@
+## method 1:
+## Drop VIEW
+DROP VIEW sales_by_client
+
+## method 2:
+## CREATE OR REPLACE VIEW
+
+## method 3 (Standard practice):
+## Save and share as repo file. 
