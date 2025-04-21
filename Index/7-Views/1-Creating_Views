@@ -6,7 +6,7 @@
 ## columns: client_id, name, balance
 
 USE sql_invoicing;
-
+CREATE VIEW sales_by_client AS
 SELECT
 	c.client_id,
     c.name,
