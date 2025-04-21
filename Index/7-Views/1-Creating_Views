@@ -1,16 +1,49 @@
 ## Views is a powerful tool to save common queries to use later.
 ## Views do not store data, however can be manipulated same way as tables.
 
-## Create a View AS  clients_balance
-## See the balance for each client
-## columns: client_id, name, balance
-
 USE sql_invoicing;
+
 CREATE VIEW sales_by_client AS
 SELECT
 	c.client_id,
     c.name,
     SUM(invoice_total) AS  total_sales
+FROM clients c
+JOIN invoices i USING (client_id)
+GROUP BY client_id, name
+
+## Create a View AS  clients_balance
+## See the balance for each client
+## columns: client_id, name, balance
+
+## step1
+SELECT *
+FROM clients c
+JOIN invoices i USING (client_id)
+
+## step2
+SELECT 
+	c.client_id,
+    c.name,
+    invoice_total - payment_total AS balance
+FROM clients c
+JOIN invoices i USING (client_id)
+
+## step3
+SELECT 
+	c.client_id,
+    c.name,
+    SUM(invoice_total - payment_total) AS balance
+FROM clients c
+JOIN invoices i USING (client_id)
+GROUP BY client_id, name
+
+## step4
+CREATE VIEW clients_balance AS
+SELECT 
+	c.client_id,
+    c.name,
+    SUM(invoice_total - payment_total) AS balance
 FROM clients c
 JOIN invoices i USING (client_id)
 GROUP BY client_id, name
